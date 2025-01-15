@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ordinals Wallet Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="img2.jpg" type="image/x-icon">
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="sidebar-icon"><i class="fas fa-home"></i></div>
+        <div class="sidebar-icon"><i class="fas fa-exchange-alt"></i></div>
+        <div class="sidebar-icon"><i class="fas fa-wallet"></i></div>
+        <div class="sidebar-icon"><i class="fas fa-cubes"></i></div>
+        <div class="sidebar-icon"><i class="fas fa-cog"></i></div>
+      </div>
+      <div class="main-content">
+        <header class="header">
+          <h1>Crypto Wallet</h1>
+          <div class="controls">
+            <button class="theme-toggle" id="themeToggle">
+              <i class="fas fa-sun"></i>
+            </button>
+            <div class="notification">
+              <i class="fas fa-bell bell-icon" id="notificationIcon"></i>
+              <div class="notification-box hidden" id="notificationBox">
+                <div class="notification-item">
+                  <p>
+                    <strong>Wallet Update</strong>: Your wallet balance has been
+                    updated.
+                  </p>
+                  <span class="notification-time">10 mins ago</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="user-info">
+              <div class="user-avatar">
+                <img src="profile.png" alt="user_profile" />
+              </div>
+              <span>admin</span>
+            </div>
+          </div>
+        </header>
+        <section class="welcome-section">
+          <div class="welcome-text">
+            <h2>Welcome to Ordinals Wallet</h2>
+            <p>
+              Buy, sell, and collect Ordinals NFTs & inscriptions on Bitcoin
+            </p>
+            <div>
+              <button class="button button-secondary">Restore Wallet</button>
+              <button class="button button-primary">Create Wallet</button>
+            </div>
+          </div>
+          <div class="nft-preview">
+            <div class="nft-cards">
+              <div class="nft-card">
+                <img src="img2.jpg" alt="Pepe & Pepite" />
+              </div>
+              <div class="nft-card">
+                <img src="img.jpg" alt="Pepe & Pepite" />
+              </div>
+              <div class="nft-card">
+                <img src="img3.jpg" alt="Pepe & Pepite" />
+              </div>
+            </div>
+            <div class="nft-info">
+              <h3>Pepe & Pepita</h3>
+              <p>FLOOR: 0.00020044 BTC</p>
+              <p class="green">Week Change +31.12%</p>
+            </div>
+          </div>
+        </section>
+        <section class="transactions">
+          <div class="transactions-header">
+            <h2>Transactions</h2>
+            <div class="tabs">
+              <div class="tab active">ALL</div>
+              <div class="tab">DAO</div>
+              <div class="tab">NFT ECOSYSTEM</div>
+              <div class="tab">DEFI</div>
+              <div class="tab">GAMEFI</div>
+              <div class="tab">MEME</div>
+            </div>
+            <div
+              class="search-bar transaction-search-bar"
+              style="position: relative"
+            >
+              <input
+                type="text"
+                placeholder="Search coins..."
+                id="search-bar-s"
+              />
+            </div>
+          </div>
+          <!-- Table structure -->
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Token</th>
+                <th>Price</th>
+                <th>Market Cap</th>
+                <th>Volume (24h)</th>
+                <th>Supply</th>
+                <th>Holders</th>
+              </tr>
+            </thead>
+            <tbody id="transactionBody">
+              <!-- Data will be dynamically injected here -->
+            </tbody>
+          </table>
+          <!-- See More Button -->
+          <button class="see-more" id="seeMoreButton">See More</button>
+        </section>
+        <footer class="footer">
+          <div class="footer-content">
+            <p class="copyright">&copy; 2025 Ibrahim Khalil</p>
+            <p class="title">Web Developer</p>
+            <a href="mailto:ggxehc@gmail.com" class="email">ggxehc@gmail.com</a>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+  <script src="app.js"></script>
+</html>

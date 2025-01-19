@@ -33,11 +33,10 @@ async function fetchTransactions() {
       marketCapChange: parseFloat(coin.change),
       volume: parseFloat(coin["24hVolume"]),
       supply: coin.supply?.total || 0,
-      iconUrl: coin.iconUrl, // Add this field
+      iconUrl: coin.iconUrl,
       holders: 0,
-      category: "ALL",
+      category: categorizeCoin(coin), // Assign category dynamically
     }));
-    
 
     renderTransactions();
   } catch (error) {
@@ -46,6 +45,16 @@ async function fetchTransactions() {
       "transactionBody"
     ).innerHTML = `<tr><td colspan="7">Failed to load coins :( </td></tr>`;
   }
+}
+
+// Categorize coins based on a more robust condition
+function categorizeCoin(coin) {
+  if (coin.name.toLowerCase().includes("dao")) return "DAO";
+  if (coin.name.toLowerCase().includes("nft")) return "NFT ECOSYSTEM";
+  if (coin.name.toLowerCase().includes("defi")) return "DEFI";
+  if (coin.name.toLowerCase().includes("game")) return "GAMEFI";
+  if (coin.name.toLowerCase().includes("meme")) return "MEME";
+  return "ALL"; // If no specific category matches, return "ALL"
 }
 
 function renderTransactions(category = "ALL", searchQuery = "") {
@@ -62,13 +71,18 @@ function renderTransactions(category = "ALL", searchQuery = "") {
     })
     .slice(0, visibleTransactions);
 
+  if (filteredTransactions.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7">No coin found for this category.</td></tr>`;
+  } else {
     filteredTransactions.forEach((t) => {
       const row = `
         <tr>
           <td>${t.id}</td>
           <td>
             <div class="token">
-              <img src="${t.iconUrl}" alt="${t.token} Icon" class="token-icon" />
+              <img src="${t.iconUrl}" alt="${
+        t.token
+      } Icon" class="token-icon" />
               ${t.token}
             </div>
           </td>
@@ -76,7 +90,9 @@ function renderTransactions(category = "ALL", searchQuery = "") {
           <td>
             $${formatNumber(t.marketCap)}
             <span class="${t.marketCapChange >= 0 ? "green" : "red"}">
-              ${t.marketCapChange >= 0 ? "+" : ""}${t.marketCapChange.toFixed(2)}%
+              ${t.marketCapChange >= 0 ? "+" : ""}${t.marketCapChange.toFixed(
+        2
+      )}%
             </span>
           </td>
           <td>$${formatNumber(t.volume)}</td>
@@ -86,7 +102,8 @@ function renderTransactions(category = "ALL", searchQuery = "") {
       `;
       tbody.innerHTML += row;
     });
-     
+  }
+
   const seeMoreButton = document.getElementById("seeMoreButton");
   if (visibleTransactions >= transactions.length) {
     seeMoreButton.style.display = "none";
@@ -100,14 +117,20 @@ document.getElementById("seeMoreButton").addEventListener("click", () => {
   const searchQuery = document.querySelector(
     ".transaction-search-bar input"
   ).value;
-  renderTransactions("ALL", searchQuery);
+  const activeTab = document
+    .querySelector(".tabs .tab.active")
+    .textContent.trim();
+  renderTransactions(activeTab, searchQuery);
 });
 
 document
   .querySelector(".transaction-search-bar input")
   .addEventListener("input", function () {
     const searchQuery = this.value;
-    renderTransactions("ALL", searchQuery);
+    const activeTab = document
+      .querySelector(".tabs .tab.active")
+      .textContent.trim();
+    renderTransactions(activeTab, searchQuery);
   });
 
 document.querySelectorAll(".tabs .tab").forEach((tab) => {
@@ -124,39 +147,28 @@ document.querySelectorAll(".tabs .tab").forEach((tab) => {
   });
 });
 
-fetchTransactions();
-
-// Set default theme to dark
-document.body.classList.add("dark-theme");
-
-// Select the theme toggle button
+// Theme toggle functionality
 const themeToggle = document.getElementById("themeToggle");
-
-// Add click event listener to the button
+document.body.classList.add("dark-theme");
 themeToggle.addEventListener("click", () => {
-  // Toggle the dark theme class on the body
   document.body.classList.toggle("dark-theme");
-
-  // Change the icon dynamically based on the theme
   const icon = themeToggle.querySelector("i");
   if (document.body.classList.contains("dark-theme")) {
-    icon.classList.replace("fa-sun", "fa-moon"); // Dark theme icon
+    icon.classList.replace("fa-moon", "fa-sun");
   } else {
-    icon.classList.replace("fa-moon", "fa-sun"); // Light theme icon
+    icon.classList.replace("fa-sun", "fa-moon");
   }
 });
 
-// Notification Bell Functionality
+// Notification bell functionality
 const notificationIcon = document.getElementById("notificationIcon");
 const notificationBox = document.getElementById("notificationBox");
 
-// Toggle the notification box on bell icon click
 notificationIcon.addEventListener("click", (event) => {
-  event.stopPropagation(); // Prevent event from propagating to document
+  event.stopPropagation();
   notificationBox.classList.toggle("hidden");
 });
 
-// Close the notification box when clicking outside of it
 document.addEventListener("click", (event) => {
   if (
     !notificationBox.classList.contains("hidden") &&
@@ -165,3 +177,21 @@ document.addEventListener("click", (event) => {
     notificationBox.classList.add("hidden");
   }
 });
+
+fetchTransactions();
+
+const home = document.querySelector(".home");
+const logout = document.querySelector(".logout");
+const setting = document.querySelector(".setting");
+const settingPage = document.querySelector(".settings-page");
+home.addEventListener("click", () => {
+  settingPage.style.display = "none";
+});
+setting.addEventListener("click", () => {
+  settingPage.style.display = "flex";
+});
+logout.addEventListener("click", () => {
+  alert("Status: success ☺");
+});
+
+ 

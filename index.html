@@ -9,17 +9,16 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="icon" href="img2.jpg" type="image/x-icon">
-
+    <link rel="icon" href="img2.jpg" type="image/x-icon" />
   </head>
   <body>
     <div class="container">
       <div class="sidebar">
-        <div class="sidebar-icon"><i class="fas fa-home"></i></div>
-        <div class="sidebar-icon"><i class="fas fa-exchange-alt"></i></div>
-        <div class="sidebar-icon"><i class="fas fa-wallet"></i></div>
-        <div class="sidebar-icon"><i class="fas fa-cubes"></i></div>
-        <div class="sidebar-icon"><i class="fas fa-cog"></i></div>
+        <div class="sidebar-icon home"><i class="fas fa-home"></i></div>
+        <div class="sidebar-icon setting"><i class="fas fa-cog"></i></div>
+        <div class="sidebar-icon logout">
+          <i class="fas fa-sign-out-alt"></i>
+        </div>
       </div>
       <div class="main-content">
         <header class="header">
@@ -49,6 +48,65 @@
             </div>
           </div>
         </header>
+        <div class="settings-page">
+          <h2 class="settings-title">Settings</h2>
+
+          <!-- Theme Toggle -->
+          <div class="settings-item theme-toggle">
+            <label for="theme-toggle">Dark Mode</label>
+            <input type="checkbox" id="theme-toggle" />
+          </div>
+
+          <!-- User Profile Settings -->
+          <div class="settings-item profile-settings">
+            <label for="profile-pic">Profile Picture</label>
+            <input type="file" id="profile-pic" />
+          </div>
+
+          <div class="settings-item">
+            <label for="username">Username</label>
+            <input type="text" id="username" />
+          </div>
+
+          <div class="settings-item">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" />
+          </div>
+
+          <!-- Notification Preferences -->
+          <div class="settings-item notification-settings">
+            <label for="email-notifications">Email Notifications</label>
+            <input type="checkbox" id="email-notifications" checked />
+          </div>
+
+          <div class="settings-item">
+            <label for="push-notifications">Push Notifications</label>
+            <input type="checkbox" id="push-notifications" />
+          </div>
+
+          <!-- Language Settings -->
+          <div class="settings-item language-settings">
+            <label for="language">Language</label>
+            <select id="language">
+              <option value="en">English</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+            </select>
+          </div>
+
+          <!-- Account Management -->
+          <div class="settings-item">
+            <button type="button" class="delete-account-btn">
+              Delete Account
+            </button>
+          </div>
+
+          <!-- Save Changes -->
+          <div class="settings-item">
+            <button type="submit" class="save-changes-btn">Save Changes</button>
+          </div>
+        </div>
+
         <section class="welcome-section">
           <div class="welcome-text">
             <h2>Welcome to Ordinals Wallet</h2>
@@ -88,7 +146,6 @@
               <div class="tab">NFT ECOSYSTEM</div>
               <div class="tab">DEFI</div>
               <div class="tab">GAMEFI</div>
-              <div class="tab">MEME</div>
             </div>
             <div
               class="search-bar transaction-search-bar"
